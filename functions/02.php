@@ -62,21 +62,11 @@
         return $test;
     }
 
-    // function feedback($message,$class){
-    //     switch($class){
-    //         case 'error':
-    //             return $message = 'Error: Incorrect email adress';
-    //             break;
-    //         case 'info':
-    //             $message = 'Info: Incorrect email adress';
-    //             break;
-    //         case 'warning':
-    //             $message = 'Warning: Incorrect email adress';
-    //             break;
-    //         default:
-    //             $message = ''
-    //     }
-    // }
+    function feedback($message,$class = 'info'){
+
+                return '<div class ="'. $class . '">' . ucfirst($class) . ' : ' . $message . '.</div>';
+
+    }
 
     ?>
 
@@ -171,6 +161,10 @@ echo addition(3,5);
     </pre>
 
     <?php echo replaceLetterInv('cæcotrophie, chænichthys, microsphæra, sphærotheca'); ?>
+
+    <h2>Create a function to add class to div tag and display error message</h2>
+
+    <?php echo feedback('Incorrect email address');?>
 
 </body>
 
