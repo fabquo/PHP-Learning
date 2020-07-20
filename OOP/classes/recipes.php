@@ -11,11 +11,11 @@
 
 class Recipe{
     private $title;
-    public $ingredients = array();
-    public $instructions = array();
-    public $yield;
-    public $tag = array();
-    public $source = 'The Crazy cooker';
+    private $ingredients = array();
+    private $instructions = array();
+    private $yield;
+    private $tag = array();
+    private $source = 'The Crazy cooker';
 
     private $measurements = array(
         'liter',
@@ -23,7 +23,8 @@ class Recipe{
         'cup',
         'kg',
         'c. à soupe',
-        'c. à café'
+        'c. à café',
+        'pc'
     );
 
     public function displayRecipe(){
@@ -59,21 +60,68 @@ class Recipe{
         return $this->ingredients;
     }
 
+    public function getInstructions(){
+        return $this->instructions;
+    }
+
+    public function addInstructions($string){
+        $this->instructions[] = $string;
+    }
+
+    public function getTags(){
+        return $this->tags;
+    }
+
+    public function addTag($tag){
+        $this->tags[] = strtolower($tag);
+    }
+
+    public function getYield(){
+        return $this->yield;
+    }
+
+    public function setYield($yield){
+        $this->yield = $yield;
+    }
+
+    public function getSource(){
+        return $this->source;
+    }
+
+    public function setSource($source){
+        $this->source = ucwords($source);
+    }
+
+    public function __construct($title) {
+	    $this->setTitle($title);
+    }
+
+    public function __toString()
+    {
+	    $output = "Your are calling a " . __CLASS__ . " object withe the title \"";
+        $output .= $this->getTitle() . "\".";
+        $output .= " It is stored in " . basename(__FILE__) . " at " . __DIR__ . ".";
+        $output .= " This display from line " . __LINE__ . " in method " . __METHOD__;
+        $output .= " <br/>The following methods are available for objects in this class: <br/>";
+        $output .= implode("<br/>", get_class_methods(__CLASS__));
+        return $output;
+    }
+
 }
 
-$recipe1 = new Recipe();
-$recipe1->setTitle("my first recipe");
-$recipe1->addIngredients('Sel', 2, 'c. à café');
+// $recipe1 = new Recipe();
+// $recipe1->setTitle("my first recipe");
+// $recipe1->addIngredients('Sel', 2, 'c. à café');
 
-echo '<br>' . $recipe1->getTitle();
+// echo '<br>' . $recipe1->getTitle();
 
-echo '<br>' . $recipe1->source;
+// echo '<br>' . $recipe1->source;
 
-echo '<br>' . $recipe1->displayRecipe();
+// echo '<br>' . $recipe1->displayRecipe();
 
-foreach ($recipe1->getIngredients() as $ing){
-    echo '<br>' . $ing['amount'] . ' ' . $ing['measure'] . ' of ' . $ing['item'] . '<br>';
-}
+// foreach ($recipe1->getIngredients() as $ing){
+    // echo '<br>' . $ing['amount'] . ' ' . $ing['measure'] . ' of ' . $ing['item'] . '<br>';
+// }
 
 ?>
 
